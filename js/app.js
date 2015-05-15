@@ -1,13 +1,7 @@
 (function (window) {
 	'use strict';
 
-	var list = [ ];
-
-	console.log(list);
-
-	todos.addTaskToList("Remember the milk", list);
-
-	console.log(list);
+	var list = [];
 	// Your starting point. Enjoy the ride!
 	var newTodoInput = document.querySelector('input.new-todo');
 	var deleteTask = document.querySelector('ul.todo-list');
@@ -17,6 +11,13 @@
 	//deleteTask.addEventListener('mouseover', function deleteTaskController(event){
 	//	console.log("This deletes stuff");
 	//});
+	newTodoInput.addEventListener('keyup', function addTodoController(event){
+		if ( event.keyCode === 13){ // AND presses the "Enter" key
+			todos.addTaskToList(task, todos.taskList);
+
+
+		}
+	}); // END addEventListener(addTodoController)
 
 	_.forEach(deleteTaskButtons, function(element, index, deleteTaskButtons){
 		element.addEventListener('click', function removeLi(){
@@ -31,7 +32,5 @@
 			console.log("Edit this shit!");
 		});
 	});
-
-	console.log(editTask);
 
 })(window);

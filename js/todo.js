@@ -36,6 +36,7 @@
   }
 
   window.todos = {
+    "taskList": taskList,
     "addTaskToList": addTaskToList,
     "completeTask": completeTask,
     "deleteTask": deleteTask

@@ -11,14 +11,27 @@
 	// Your starting point. Enjoy the ride!
 	var newTodoInput = document.querySelector('input.new-todo');
 	var deleteTask = document.querySelector('ul.todo-list');
-	var deleteTask2 = document.querySelector('button.destroy');
+	var deleteTaskButtons = document.querySelectorAll('button.destroy');
+	var editTask = document.querySelectorAll('li');
 
-	deleteTask.addEventListener('mouseover', function deleteTaskController(event){
-		console.log("This deletes stuff");
+	//deleteTask.addEventListener('mouseover', function deleteTaskController(event){
+	//	console.log("This deletes stuff");
+	//});
+
+	_.forEach(deleteTaskButtons, function(element, index, deleteTaskButtons){
+		element.addEventListener('click', function removeLi(){
+			var deleteTaskButtons = document.querySelectorAll('button.destroy');;
+			var editTask = document.querySelectorAll('li');
+			editTask[index].parentNode.removeChild(editTask[index]);
+		});
 	});
 
-	deleteTask2.addEventListener('click', function(event){
-		console.log("Delete crap")
+	_.forEach(editTask, function(element, index, editTask){
+		element.addEventListener('dblclick', function(){
+			console.log("Edit this shit!");
+		});
 	});
+
+	console.log(editTask);
 
 })(window);

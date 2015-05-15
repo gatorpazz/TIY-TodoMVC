@@ -2,7 +2,7 @@
 //    expect = chai.expect;
 (function (window) {
 
-  var expect = require('chai').expect;
+//  var expect = require('chai').expect;
 
   var taskList = [];
   var placeholder;

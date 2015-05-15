@@ -12,10 +12,11 @@
 	//	console.log("This deletes stuff");
 	//});
 	newTodoInput.addEventListener('keyup', function addTodoController(event){
-		if ( event.keyCode === 13){ // AND presses the "Enter" key
-			todos.addTaskToList(task, todos.taskList);
-
-
+		if ( event.keyCode === 13){
+			if ( newTodoInput.value !== '' ){
+				var newTask = todos.addTaskToList(newTodoInput.value.trim(), todos.taskList);
+				newTodoInput.value = '';
+			}
 		}
 	}); // END addEventListener(addTodoController)
 

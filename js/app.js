@@ -17,13 +17,14 @@
 			if ( newTodoInput.value !== '' ){
 				var newTask = todos.addTaskToList(newTodoInput.value.trim(), todos.taskList);
 				var clone = templateContent.cloneNode(true);
+				clone.querySelector("label").appendChild(document.createTextNode(newTodoInput.value));
 				deleteTask.appendChild(clone);
 				newTodoInput.value = '';
 				editingTasks();
 			}
 		}
 	}); // END addEventListener(addTodoController)
-	
+
 	_.forEach(deleteTaskButtons, function(element, index, deleteTaskButtons){
 		element.addEventListener('click', function removeLi(){
 			var deleteTaskButtons = document.querySelectorAll('button.destroy');;

@@ -16,7 +16,7 @@
 			if ( newTodoInput.value !== '' ){
 				todos.addTaskToList(newTodoInput.value.trim(), todos.taskList);
 				var clone = templateContent.cloneNode(true);
-				clone.querySelector("label").appendChild(document.createTextNode(newTodoInput.value.trim()));
+				clone.querySelector("label").appendChild(document.createTextNode(newTodoInput.value.trim())); //received from kind stranger on stack overflow
 				clone.querySelector("input.edit").value = document.createTextNode(newTodoInput.value.trim());
 				todoList.appendChild(clone);
 				newTodoInput.value = '';

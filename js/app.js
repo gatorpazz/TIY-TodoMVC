@@ -21,6 +21,7 @@
 				newTodoInput.value = '';
 				deletingTasks();
 				editingTasks();
+				completingTasks();
 			}
 		}
 	}); // END addEventListener(addTodoController)
@@ -38,6 +39,13 @@
 		_.last(editTask).addEventListener('dblclick', function taskEdit(){
 			console.log("Edit this shit!");
 		});
+	}
+
+	function completingTasks(){
+		var completeTask = document.querySelectorAll('input.toggle');
+		_.last(completeTask).addEventListener('click', function(){
+			event.target.parentNode.parentNode.classList.toggle('completed')
+		})
 	}
 
 

@@ -4,8 +4,7 @@
 	var list = [];
 	// Your starting point. Enjoy the ride!
 	var newTodoInput = document.querySelector('input.new-todo');
-	var deleteTask = document.querySelector('ul.todo-list');
-	var deleteTaskButtons = document.querySelectorAll('button.destroy');
+	var todoList = document.querySelector('ul.todo-list');
 	var editTask = document.querySelectorAll('li');
 	var templateContent = document.querySelector('template').content;
 
@@ -17,30 +16,29 @@
 			if ( newTodoInput.value !== '' ){
 				var newTask = todos.addTaskToList(newTodoInput.value.trim(), todos.taskList);
 				var clone = templateContent.cloneNode(true);
-				clone.querySelector("label").appendChild(document.createTextNode(newTodoInput.value));
-				deleteTask.appendChild(clone);
+				clone.querySelector("label").appendChild(document.createTextNode(newTodoInput.value.trim()));
+				todoList.appendChild(clone);
 				newTodoInput.value = '';
-				editingTasks();
+				deletingTasks();
 			}
 		}
 	}); // END addEventListener(addTodoController)
-
-	_.forEach(deleteTaskButtons, function(element, index, deleteTaskButtons){
-		element.addEventListener('click', function removeLi(){
-			var deleteTaskButtons = document.querySelectorAll('button.destroy');;
-			var editTask = document.querySelectorAll('li');
-			editTask[index].parentNode.removeChild(editTask[index]);
-			todos.deleteTask()
+	function deletingTasks() {
+		var deleteTaskButtons = document.querySelectorAll('button.destroy');
+		_.last(deleteTaskButtons).addEventListener('click', function removeLi(){
+			//console.log(event.target.parentNode.parentNode.parentNode);
+			event.target.parentNode.parentNode.parentNode.removeChild(event.target.parentNode.parentNode);
+			todos.deleteTask(_.indexOf(deleteTaskButtons, event.target), todos.taskList);
+			editingTasks();
 		});
-	});
+	}
 
 	function editingTasks(){
 		var editTask = document.querySelectorAll('li');
-		_.forEach(editTask, function(element, index, editTask){
-			element.addEventListener('dblclick', function(){
-				console.log("Edit this shit!");
-			});
+		_.last(editTask).addEventListener('dblclick', function taskEdit(){
+			console.log("Edit this shit!");
 		});
 	}
+
 
 })(window);

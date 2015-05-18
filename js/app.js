@@ -20,6 +20,7 @@
 				todoList.appendChild(clone);
 				newTodoInput.value = '';
 				deletingTasks();
+				editingTasks();
 			}
 		}
 	}); // END addEventListener(addTodoController)
@@ -29,12 +30,11 @@
 			//console.log(event.target.parentNode.parentNode.parentNode);
 			event.target.parentNode.parentNode.parentNode.removeChild(event.target.parentNode.parentNode);
 			todos.deleteTask(_.indexOf(deleteTaskButtons, event.target), todos.taskList);
-			editingTasks();
 		});
 	}
 
 	function editingTasks(){
-		var editTask = document.querySelectorAll('li');
+		var editTask = document.querySelectorAll('li.task');
 		_.last(editTask).addEventListener('dblclick', function taskEdit(){
 			console.log("Edit this shit!");
 		});

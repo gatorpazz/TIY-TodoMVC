@@ -14,9 +14,10 @@
 	newTodoInput.addEventListener('keyup', function addTodoController(event){
 		if ( event.keyCode === 13){
 			if ( newTodoInput.value !== '' ){
-				var newTask = todos.addTaskToList(newTodoInput.value.trim(), todos.taskList);
+				todos.addTaskToList(newTodoInput.value.trim(), todos.taskList);
 				var clone = templateContent.cloneNode(true);
 				clone.querySelector("label").appendChild(document.createTextNode(newTodoInput.value.trim()));
+				clone.querySelector("input.edit").value = document.createTextNode(newTodoInput.value.trim());
 				todoList.appendChild(clone);
 				newTodoInput.value = '';
 				deletingTasks();
@@ -36,9 +37,16 @@
 
 	function editingTasks(){
 		var editTask = document.querySelectorAll('li.task');
+		var editInput = document.querySelectorAll('input.edit');
 		_.last(editTask).addEventListener('dblclick', function taskEdit(){
-			console.log("Edit this shit!");
+			//console.log("Edit this shit!");
+			event.target.parentNode.parentNode.classList.toggle('editing');
 		});
+		document.addEventListener('click', function exitEdit(){
+			_.forEach(editTask, function(index){
+				index.classList.remove('editing');
+			})
+		})
 	}
 
 	function completingTasks(){
@@ -50,3 +58,12 @@
 
 
 })(window);
+/*editInput.addEventListener('keyup', function inputExit(){
+	if ( event.keycode === 13 ){
+		if ( editInput.value !== '' ){
+			console.log("okay guy!");
+		}
+		else {
+			event.target.parentNode.parentNode.parentNode.removeChild(event.target.parentNode.parentNode);
+		}
+	}*/

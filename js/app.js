@@ -14,12 +14,15 @@
 	newTodoInput.addEventListener('keyup', function addTodoController(event){
 		if ( event.keyCode === 13){
 			if ( newTodoInput.value !== '' ){
-				var newTask = todos.addTaskToList(newTodoInput.value.trim(), todos.taskList);
+				todos.addTaskToList(newTodoInput.value.trim(), todos.taskList);
 				var clone = templateContent.cloneNode(true);
-				clone.querySelector("label").appendChild(document.createTextNode(newTodoInput.value.trim()));
+				clone.querySelector("label").appendChild(document.createTextNode(newTodoInput.value.trim())); //received from kind stranger on stack overflow
+				clone.querySelector("input.edit").value = newTodoInput.value.trim();
 				todoList.appendChild(clone);
 				newTodoInput.value = '';
 				deletingTasks();
+				editingTasks();
+				completingTasks();
 			}
 		}
 	}); // END addEventListener(addTodoController)
@@ -29,16 +32,38 @@
 			//console.log(event.target.parentNode.parentNode.parentNode);
 			event.target.parentNode.parentNode.parentNode.removeChild(event.target.parentNode.parentNode);
 			todos.deleteTask(_.indexOf(deleteTaskButtons, event.target), todos.taskList);
-			editingTasks();
 		});
 	}
 
 	function editingTasks(){
-		var editTask = document.querySelectorAll('li');
+		var editTask = document.querySelectorAll('li.task');
+		var editInput = document.querySelectorAll('input.edit');
 		_.last(editTask).addEventListener('dblclick', function taskEdit(){
-			console.log("Edit this shit!");
+			//console.log("Edit this shit!");
+			event.target.parentNode.parentNode.classList.toggle('editing');
 		});
+		document.addEventListener('click', function exitEdit(){
+			_.forEach(editTask, function(index){
+				index.classList.remove('editing');
+			})
+		})
+	}
+
+	function completingTasks(){
+		var completeTask = document.querySelectorAll('input.toggle');
+		_.last(completeTask).addEventListener('click', function(){
+			event.target.parentNode.parentNode.classList.toggle('completed')
+		})
 	}
 
 
 })(window);
+/*editInput.addEventListener('keyup', function inputExit(){
+	if ( event.keycode === 13 ){
+		if ( editInput.value !== '' ){
+			console.log("okay guy!");
+		}
+		else {
+			event.target.parentNode.parentNode.parentNode.removeChild(event.target.parentNode.parentNode);
+		}
+	}*/
